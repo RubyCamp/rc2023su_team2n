@@ -3,7 +3,7 @@ class EV3Controller
   DISTANCE_SENSOR = "4"
   LEFT_MOTOR = "C"
   RIGHT_MOTOR = "B"
-  MOTOR_SPEED = 50
+  MOTOR_SPEED = 10
 
   attr_reader :last_color, :last_distance
 
@@ -23,6 +23,38 @@ class EV3Controller
     sleep sec
     @brick.stop(true, *@motors)
   end
+
+  def move_back(sec, speed = MOTOR_SPEED)
+    @brick.reverse_polarity(*@motors)
+    @brick.start(speed, *@motors)
+    sleep sec
+    @brick.stop(true, *@motors)
+    @brick.reverse_polarity(*@motors)
+  end
+
+  def right_torun(sec, speed = MOTOR_SPEED)
+    @brick.reverse_polarity(RIGHT_MOTOR)
+    @brick.start(speed, *@motors)
+    sleep sec
+    @brick.stop(true, *@motors)
+    @brick.run_forward(*@motors)
+
+    @brick.start(speed, *@motors)
+    sleep sec + 1
+    @brick.stop(true, *@motors)
+  end
+
+  def left_torun(sec, speed = MOTOR_SPEED)
+    @brick.reverse_polarity(LEFT_MOTOR)
+    @brick.start(speed, *@motors)
+    sleep sec
+    @brick.stop(true, *@motors)
+    @brick.run_forward(*@motors)
+
+    @brick.start(speed, *@motors)
+    sleep sec + 1
+    @brick.stop(true, *@motors)
+  end  
 
   def update_sensor_value
     @wait_cnt += 1
