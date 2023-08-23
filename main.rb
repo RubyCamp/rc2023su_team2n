@@ -7,7 +7,6 @@ Window.height = 600
 
 map = Map.new("map_data/map.dat")
 
-
 Window.loop do
   
   map.update
