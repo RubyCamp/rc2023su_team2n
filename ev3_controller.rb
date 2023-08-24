@@ -5,9 +5,8 @@ class EV3Controller
   RIGHT_MOTOR = "B"
   MOTOR_SPEED = 15
 
+  data=[]
   attr_reader :last_color, :last_distance
-  data = 0
-
   def initialize(port = "COM4")
     @motors = [LEFT_MOTOR, RIGHT_MOTOR]
     @brick = EV3::Brick.new(EV3::Connections::Bluetooth.new(port))
@@ -24,7 +23,7 @@ class EV3Controller
     sleep sec
     @brick.stop(true, *@motors)
     puts @brick.get_sensor(COLOR_SENSOR, 2)
-    data = @brick.get_sensor(COLOR_SENSOR, 2)   
+    data.push(@brick.get_sensor(COLOR_SENSOR, 2))
   end
 
   def move_back(sec, speed = MOTOR_SPEED)
@@ -34,7 +33,7 @@ class EV3Controller
     @brick.stop(true, *@motors)
     @brick.reverse_polarity(*@motors)
     puts @brick.get_sensor(COLOR_SENSOR, 2)
-    data = @brick.get_sensor(COLOR_SENSOR, 2)
+    data.push(@brick.get_sensor(COLOR_SENSOR, 2))
   end
 
   def right_torun(sec, speed = MOTOR_SPEED)
@@ -51,7 +50,7 @@ class EV3Controller
 
 
     puts @brick.get_sensor(COLOR_SENSOR, 2)
-    data = @brick.get_sensor(COLOR_SENSOR, 2)
+    data.push(@brick.get_sensor(COLOR_SENSOR, 2))
 
   end
 
@@ -66,7 +65,7 @@ class EV3Controller
     sleep sec + 1
     @brick.stop(true, *@motors)
     puts @brick.get_sensor(COLOR_SENSOR, 2)
-    data = @brick.get_sensor(COLOR_SENSOR, 2)
+    data.push(@brick.get_sensor(COLOR_SENSOR, 2))
   end  
 
   def update_sensor_value
