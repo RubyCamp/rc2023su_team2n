@@ -14,13 +14,23 @@ map = Map.new("map_data/map.dat")
 
 # ※ 座標系をマップ座標系に変更
 characters = []
-characters << Navigator.new("COM5", 0, 0, Image.load("images/navigator.png"))
+characters << Navigator.new("COM4", 0, 0, Image.load("images/navigator.png"))
 
 Window.loop do
   break if Input.key_push?(K_ESCAPE)
 
   map.update
   map.draw
+
+  if Input.key_push?(K_A)
+    new_data = [
+      ["0", "0", "0", "0"],
+      ["0", "0", "0", "0"],
+      ["0", "0", "0", "0"]
+    ]
+    map.updata_map(new_data)
+  end
+  
 
   characters.each do |char|
     char.update(map)
