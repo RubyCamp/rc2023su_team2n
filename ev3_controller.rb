@@ -1,13 +1,15 @@
 class EV3Controller
-  COLOR_SENSOR = "3"
-  DISTANCE_SENSOR = "4"
+  COLOR_SENSOR = "2"
+  DISTANCE_SENSOR = "3"
   LEFT_MOTOR = "C"
   RIGHT_MOTOR = "B"
   MOTOR_SPEED = 10
 
   attr_reader :last_color, :last_distance
 
-  def initialize(port = "COM5")
+  @arr = [[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+
+  def initialize(port = "COM3")
     @motors = [LEFT_MOTOR, RIGHT_MOTOR]
     @brick = EV3::Brick.new(EV3::Connections::Bluetooth.new(port))
     @brick.connect
@@ -68,4 +70,30 @@ class EV3Controller
     @brick.clear_all
     @brick.disconnect
   end
+
+
+  def search
+    for i in 3..0 do
+      for n in 3..0 do
+
+          case COLOR_SENSOR
+          when 6 then #white
+              @arr[i][n] = 0 
+          when 5 then #red
+              @arr[i][n] = 1
+          when 2 then #blue
+              @arr[i][n] = 2
+          when 3 then #green
+              @arr[i][n] = 3
+          end             
+            dy = 1
+            @brick.start(MOTOR_SPEED, *@motors)
+            @brick.stop(true, *@motors)
+       end
+    end
+
+  puts @arr
+  end
+
+
 end
