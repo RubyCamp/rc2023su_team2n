@@ -15,6 +15,10 @@
       
         def update
         end
+
+        def updata_map(new_data)
+          @map_data = new_data
+        end
       
         def draw
           @map_data.each_with_index do |line, my|

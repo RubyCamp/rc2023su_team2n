@@ -3,10 +3,12 @@ class Navigator < Character
     dx = 0
     dy = 0
 
+
     if Input.key_push?(K_DOWN)
       #    binding.irb
        dy = 1
        @ev3_controller.move_forward(2)
+
      end
 
     if Input.key_push?(K_UP)
@@ -27,6 +29,26 @@ class Navigator < Character
       @ev3_controller.left_torun(1.9)
     end
 
+
+  if Input.key_push?(K_RETURN)
+    data = []
+    @ev3_controller.move_forward(2)
+    data.push(brick.get_sensor(COLOR_SENSOR, 2))
+    @ev3_controller.move_forward(2)
+    @ev3_controller.move_forward(2)
+    @ev3_controller.left_torun(1.25)
+    @ev3_controller.left_torun(1.25)
+    @ev3_controller.move_forward(2)
+    @ev3_controller.move_forward(2)
+    @ev3_controller.right_torun(1.25)
+    @ev3_controller.right_torun(1.25)
+    @ev3_controller.move_forward(2.2)
+    @ev3_controller.move_forward(2.2)
+    puts data
+  end
+
+
+    
     update_new_position(map, @x + dx, @y + dy)
 
     @ev3_controller.update_sensor_value
