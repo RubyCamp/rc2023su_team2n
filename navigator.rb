@@ -27,6 +27,8 @@ class Navigator < Character
       @ev3_controller.left_torun(1.9)
     end
 
+    @ev3_controller.search
+
     update_new_position(map, @x + dx, @y + dy)
 
     @ev3_controller.update_sensor_value
