@@ -34,14 +34,14 @@ class Navigator < Character
     @ev3_controller.move_forward(2)
     @ev3_controller.move_forward(2)
     @ev3_controller.move_forward(2)
-    @ev3_controller.left_torun(1)
-    @ev3_controller.left_torun(1)
+    @ev3_controller.left_torun(1.25)
+    @ev3_controller.left_torun(1.25)
     @ev3_controller.move_forward(2)
     @ev3_controller.move_forward(2)
-    @ev3_controller.right_torun(1)
-    @ev3_controller.right_torun(1)
-    @ev3_controller.move_forward(2)
-    @ev3_controller.move_forward(2)
+    @ev3_controller.right_torun(1.25)
+    @ev3_controller.right_torun(1.25)
+    @ev3_controller.move_forward(2.2)
+    @ev3_controller.move_forward(2.2)
   end
 
 
